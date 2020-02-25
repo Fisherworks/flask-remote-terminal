@@ -1,12 +1,15 @@
 # Flask Web Terminal to Remote
 A web terminal to access certain remote ssh/telnet server with multi-user support
 
+![screenshot](https://github.com/Fisherworks/flask-remote-terminal/blob/master/flask_remote_term_demo.jpg)
 
 ## What makes this unique
 * Created for remote access and remote-only, instead of wandering on the local
 * Telnet and SSH client only (for now), can be added further (but still well controlled)
 * Made to access certain/specific target only (setup in config), away from being sidekick of villains
 * Multiple users supported by (server-side) session based key info storage
+
+![sys_chart](https://github.com/Fisherworks/flask-remote-terminal/blob/master/flask_remote_term_chart.png)
 
 ## Based on
 * A concept from github repo [pyxterm.js](https://github.com/cs01/pyxterm.js) by [cs01](https://github.com/cs01)
