@@ -13,7 +13,7 @@ import subprocess
 from config import TERM_INIT_CONFIG
 
 
-__author__ = "fisherworks.cn" #based on pyxtermjs on github
+__author__ = "fisherworks.cn" #based on flask_term_remote on github
 
 app = Flask(__name__, template_folder=".", static_folder=".", static_url_path="")
 app.config["SECRET_KEY"] = "the top secret!"
@@ -134,10 +134,13 @@ def pty_connect():
         # subprocess.run('bash')
         term_type = session.get('terminal_config').get('term_type')
         if term_type == 'telnet':
-            #subprocess.run("/usr/bin/telnet -l ctuser aquiferre.net 58096")
+            # switch to the right location of your telnet binary (example comes from OSX which got telnet from brew)
+            # or you can also make work like auto-detection, or manually but configurable
             os.execl('/usr/local/bin/telnet', 'telnet', '-l', session['terminal_config']['username'],
                      session['terminal_config']['domain'], '{}'.format(session['terminal_config']['port']))
         elif term_type == 'ssh':
+            # switch to the right location of your ssh binary
+            # or you can also make work like auto-detection, or manually but configurable
             os.execl('/usr/bin/ssh', 'ssh', '-p',
                      '{}'.format(session['terminal_config']['port']),
                      '{}@{}'.format(session['terminal_config']['username'], session['terminal_config']['domain']))
