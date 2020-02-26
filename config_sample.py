@@ -4,7 +4,7 @@ TERM_INIT_CONFIG = {
     # and before doing so - make sure you have username and port (on the "domain") to implement remote access
     'domain': 'example.com', # or ip address like 192.168.10.11
     'client_path': {
-        'telnet': '/usr/local/bin/telnet', # confirmed location of your client binary (with cmd like 'which telnet')
+        'telnet': '/usr/bin/telnet', # confirmed location of your client binary (with cmd like 'which telnet')
         'ssh': '/usr/bin/ssh'
     }
 }

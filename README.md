@@ -43,14 +43,19 @@ Clone this repository, get into the folder, then run:
 python3 -m venv venv  # must be python3.6+
 venv/bin/pip install -r requirements.txt
 ```
-Locate the `os.execl` parts of the code (2 of them), make sure the following telnet and ssh binary paths are correct for your environment. If not, slightly edit the code to make it right. 
+Now copy the file `config_sample.py` to `config.py`, then edit the `domain` to be your remote target, either ip addr or domain name should work.
 
-Now copy the file "config_sample.py" to "config.py", then edit the "domain" to be your remote target, either ip addr or domain name should work.
+Make sure you have the telnet and/or ssh client binary installed on the server, with absolute paths here in the config. 
+For example, if the server OS is macOS, and telnet was installed through Brew, then the telnet path could be `/usr/local/bin/telnet`
 
 Example:
 ```
 TERM_INIT_CONFIG = {
-    'domain': '192.168.11.111'    # or jumphost.example.com
+    'domain': 'example.com', # or ip address like 192.168.10.11
+    'client_path': {
+        'telnet': '/usr/bin/telnet', # confirmed location of your client binary (with cmd like 'which telnet')
+        'ssh': '/usr/bin/ssh'
+    }
 }
 ```
 Run `python app.py` or `gunicorn -b 0.0.0.0:5000 -k gevent -w 1 app:app`
