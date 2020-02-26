@@ -33,9 +33,9 @@
   Terminal.applyAddon(webLinks)
   Terminal.applyAddon(search)
   const term = new Terminal({
-        cursorBlink: true,
+        cursorBlink: 5,
         macOptionIsMeta: true,
-        scrollback: true,
+        scrollback: 300,
     });
   term.open(document.getElementById('terminal'));
   term.fit()

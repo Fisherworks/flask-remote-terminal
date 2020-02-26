@@ -133,15 +133,19 @@ def pty_connect():
         # of this subprocess
         # subprocess.run('bash')
         term_type = session.get('terminal_config').get('term_type')
+        path = TERM_INIT_CONFIG.get('client_path', {}).get(term_type, None)
+        if not path:
+            print("Can't locate {} binary, exit".format(term_type))
+            disconnect()
         if term_type == 'telnet':
             # switch to the right location of your telnet binary (example comes from OSX which got telnet from brew)
             # or you can also make work like auto-detection, or manually but configurable
-            os.execl('/usr/local/bin/telnet', 'telnet', '-l', session['terminal_config']['username'],
+            os.execl(path, 'telnet', '-l', session['terminal_config']['username'],
                      session['terminal_config']['domain'], '{}'.format(session['terminal_config']['port']))
         elif term_type == 'ssh':
             # switch to the right location of your ssh binary
             # or you can also make work like auto-detection, or manually but configurable
-            os.execl('/usr/bin/ssh', 'ssh', '-p',
+            os.execl(path, 'ssh', '-p',
                      '{}'.format(session['terminal_config']['port']),
                      '{}@{}'.format(session['terminal_config']['username'], session['terminal_config']['domain']))
         else:
