@@ -52,7 +52,14 @@ def read_and_forward_pty_output(fd=None, pid=None, room_id=None):
             (data_ready, _, _) = select.select([fd], [], [], timeout_sec)
             if data_ready:
                 # output = os.read(fd, max_read_bytes).decode('ascii')
-                output = os.read(fd, max_read_bytes).decode()
+                try:
+                    output = os.read(fd, max_read_bytes).decode()
+                except Exception as err:
+                    output = """
+                    ***AQUI WEB TERM ERR***
+                    {}
+                    ***********************
+                    """.format(err)
                 # the key for different visitor to get different terminal (instead of mixing up)
                 # is to let the background task push pty response to each one's own (default) ROOM!
                 socketio.emit("pty-output", {"output": output}, namespace="/pty", room=room_id)
