@@ -181,7 +181,7 @@ def pty_connect():
 @socketio.on('disconnect', namespace='/pty')
 def pty_disconnect():
     try:
-        child_process = psutil.Process(session.get('terminal_config').get('child_pid'))
+        child_process = psutil.Process(session.get('terminal_config', {}).get('child_pid'))
     except psutil.NoSuchProcess as err:
         disconnect()
         session['terminal_config'] = TERM_INIT_CONFIG
