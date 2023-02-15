@@ -12,4 +12,4 @@ psutil==5.7.0
 python-engineio==3.11.2
 python-socketio==4.4.0
 six==1.14.0
-Werkzeug==0.15.5
+Werkzeug==2.2.3
